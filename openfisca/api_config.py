@@ -1,5 +1,5 @@
 port = 2000
-workers = 4
+workers = 2
 timeout = 60
 
 country_package = 'openfisca_france'

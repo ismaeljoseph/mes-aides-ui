@@ -34,6 +34,7 @@ var ressourceCategories = [
 
 var ressourceTypes = [
     {
+        base_al: true,
         id: 'salaire_net_hors_revenus_exceptionnels',
         label: 'Salaire (hors primes)',
         category: 'revenusActivite',
@@ -41,6 +42,7 @@ var ressourceTypes = [
         positionInList: '1'
     },
     {
+        base_al: true,
         id: 'primes_salaires_net',
         label: 'Primes (dont 13ème mois)',
         category: 'revenusActivite',
@@ -49,84 +51,98 @@ var ressourceTypes = [
         revenuExceptionnel: true,
     },
     {
+        base_al: true,
         id: 'indemnites_stage',
         label: 'Rémunération de stage',
         category: 'revenusActivite',
         prefix: 'une'
     },
     {
+        base_al: true,
         id: 'revenus_stage_formation_pro',
         label: 'Revenus de stage de formation professionnelle',
         category: 'revenusActivite',
         prefix: 'des'
     },
     {
+        base_al: true,
         id: 'chomage_net',
         label: 'Allocations chômage (ARE)',
         category: 'allocations',
         interuptionQuestionLabel: 'des allocations chômage, un salaire ou des indemnités de la sécurité sociale'
     },
     {
+        base_al: false,
         id: 'allocation_securisation_professionnelle',
         label: 'Allocation de sécurisation professionnelle',
         category: 'allocations',
         prefix: 'une'
     },
     {
+        base_al: false,
         id: 'prime_forfaitaire_mensuelle_reprise_activite',
         label: 'Prime forfaitaire mensuelle pour la reprise d’activité',
         category: 'allocations',
         prefix: 'une'
     },
     {
+        base_al: false,
         id: 'aide_logement',
         label: 'Aides au logement (APL, ALS, ALF)',
         category: 'allocations',
         prefix: 'des'
     },
     {
+        base_al: false,
         id: 'af',
         label: 'Allocations familiales',
         category: 'allocations',
         prefix: 'des'
     },
     {
+        base_al: false,
         id: 'cf',
         label: 'Complément familial (CF)',
         category: 'allocations',
         prefix: 'le'
     },
     {
+        base_al: false,
         id: 'asf',
         label: 'Allocation de soutien familial (ASF)',
         category: 'allocations',
         prefix: 'l’'
     },
     {
+        base_al: false,
         id: 'rsa',
         label: 'Revenu de solidarité active (RSA)',
         category: 'allocations',
         prefix: 'le'
     },
     {
+        base_al: false,
         id: 'ppa',
         label: 'Prime d’activité',
         category: 'revenusActivite',
         prefix: 'la'
     },
     {
+        base_al: false,
         id: 'aspa',
         label: 'Allocation de solidarité aux personnes âgées (ASPA)',
         category: 'allocations',
         prefix: 'l’'
     },
     {
+        base_al: false,
         id: 'asi',
         label: 'Allocation supplémentaire d’invalidité (ASI)',
         category: 'allocations',
         prefix: 'l’'
     },
     {
+        base_al: true,
         id: 'ass',
         label: 'Allocation de solidarité spécifique (ASS)',
         category: 'allocations',
@@ -134,90 +150,105 @@ var ressourceTypes = [
 
     },
     {
+        base_al: false,
         id: 'aah',
         label: 'Allocation adulte handicapé (AAH)',
         category: 'allocations',
         prefix: 'l’'
     },
     {
+        base_al: false,
         id: 'caah',
         label: 'Complément à l’Allocation adulte handicapé (AAH)',
         category: 'allocations',
         prefix: 'le'
     },
     {
+        base_al: false,
         id: 'mva',
         label: 'Majoration pour vie autonome (MVA)',
         category: 'allocations',
         prefix: 'la'
     },
     {
+        base_al: false,
         id: 'aeeh',
         label: 'Allocation d’éducation de l’enfant handicapé (AEEH)',
         category: 'allocations',
         prefix: 'l’'  // We don't actually need to capture the amount, but users want to declare it, and presence can improve some Paris aides. See https://github.com/sgmap/mes-aides-ui/issues/191
     },
     {
+        base_al: false,
         id: 'pch',
         label: 'Prestation de compensation du handicap (PCH)',
         category: 'allocations',
         prefix: 'la'
     },
     {
+        base_al: false,
         id: 'paje_base',
         label: 'Prestation d’accueil du jeune enfant (PAJE) - Allocation de base',
         category: 'allocations',
         prefix: 'la'
     },
     {
+        base_al: false,
         id: 'paje_clca',
         label: 'Complément de libre choix d’activité (CLCA)',
         category: 'allocations',
         prefix: 'le'
     },
     {
+        base_al: false,
         id: 'paje_prepare',
         label: 'Prestation partagée d’éducation de l’enfant (PreParE)',
         category: 'allocations',
         prefix: 'la'
     },
     {
+        base_al: true,
         id: 'indemnites_journalieres_maternite',
         label: 'Indemnités de maternité, paternité, adoption',
         category: 'indemnites',
         interuptionQuestionLabel: 'des indemnités de la sécurité sociale, un salaire ou des allocations chômage'
     },
     {
+        base_al: true,
         id: 'indemnites_journalieres_maladie',
         label: 'Indemnités maladie',
         category: 'indemnites',
         interuptionQuestionLabel: 'des indemnités de la sécurité sociale, un salaire ou des allocations chômage'
     },
     {
+        base_al: true,
         id: 'indemnites_journalieres_maladie_professionnelle',
         label: 'Indemnités maladie professionnelle',
         category: 'indemnites',
         interuptionQuestionLabel: 'des indemnités de la sécurité sociale, un salaire ou des allocations chômage'
     },
     {
+        base_al: true,
         id: 'indemnites_journalieres_accident_travail',
         label: 'Indemnités d’accident du travail',
         category: 'indemnites',
         interuptionQuestionLabel: 'des indemnités de la sécurité sociale, un salaire ou des allocations chômage'
     },
     {
+        base_al: true,
         id: 'indemnites_chomage_partiel',
         label: 'Indemnités d’activité partielle',
         category: 'indemnites',
         prefix: 'des'
     },
     {
+        base_al: true,
         id: 'indemnites_volontariat',
         label: 'Indemnités de volontariat',
         category: 'indemnites',
         prefix: 'des'
     },
     {
+        base_al: true, // Pris (si imposable)
         id: 'indemnite_fin_contrat_net',
         label: 'Indemnités de licenciement, rupture, fin de CDD…',
         category: 'revenusActivite',
@@ -225,96 +256,112 @@ var ressourceTypes = [
         revenuExceptionnel: true,
     },
     {
+        base_al: false, // Mais la prestation versée elle est prise
         id: 'dedommagement_victime_amiante',
         label: 'Dédommagement aux victimes de l’amiante',
         category: 'indemnites',
         prefix: 'un'
     },
     {
+        base_al: true,
         id: 'pensions_alimentaires_percues',
         label: 'Pension alimentaire',
         category: 'pensions',
         prefix: 'une'
     },
     {
+        base_al: true,
         id: 'pensions_alimentaires_versees_individu',
         label: 'Pension alimentaire versée',
         category: 'pensions',
         interuptionQuestionLabel: 'une pension alimentaire',
     },
     {
+        base_al: true,
         id: 'prestation_compensatoire',
         label: 'Prestation compensatoire (suite à séparation)',
         category: 'pensions',
         prefix: 'une'
     },
     {
+        base_al: true,
         id: 'retraite_nette',
         label: 'Retraite (y compris reversion), rente',
         category: 'pensions',
         prefix: 'une'
     },
     {
+        base_al: false,
         id: 'retraite_combattant',
         label: 'Retraite du combattant',
         category: 'pensions',
         prefix: 'une'
     },
     {
+        base_al: true,
         id: 'pensions_invalidite',
         label: 'Pension d’invalidité',
         category: 'pensions',
         prefix: 'une'
     },
     {
+        base_al: false,
         id: 'bourse_enseignement_sup',
         label: 'Bourse de l’enseignement supérieur',
         category: 'autre',
         prefix: 'une'
     },
     {
+        base_al: true,
         id: 'bourse_recherche',
         label: 'Bourse de recherche',
         category: 'autre',
         prefix: 'une'
     },
     {
+        base_al: false,
         id: 'gains_exceptionnels',
         label: 'Gains exceptionnels (dons, gains aux jeux, héritage)',
         category: 'autre',
         prefix: 'des'
     },
     {
+        base_al: true,
         id: 'revenus_locatifs',
         label: 'Revenus locatifs (terrains, appartements, SCI…)',
         category: 'patrimoine',
         prefix: 'des'
     },
     {
+        base_al: true,
         id: 'revenus_capital',
         label: 'Revenus du capital (intérêts, plus-values, dividendes…)',
         category: 'patrimoine',
         prefix: 'des'
     },
     {
+        base_al: true, // Déclaration DGFIP donc on ne sait pas trop si CA, CA-charges
         id: 'tns_micro_entreprise_chiffre_affaires',
         label: 'Micro-entreprise',
         category: 'rpns',
         isMontantAnnuel: true
     },
     {
+        base_al: true, //
         id: 'tns_auto_entrepreneur_chiffre_affaires',
         label: 'Auto-entrepreneur',
         category: 'rpns',
         interuptionQuestionLabel: 'un chiffre d’affaires non nul',
     },
     {
+        base_al: true,
         id: 'tns_benefice_exploitant_agricole',
         label: 'Exploitant agricole',
         category: 'rpns',
         isMontantAnnuel: true
     },
     {
+        base_al: true,
         id: 'tns_autres_revenus',
         label: 'Profession libérale, entrepreneur',
         category: 'rpns',
