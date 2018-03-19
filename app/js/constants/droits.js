@@ -471,6 +471,16 @@ var droitsDescription = {
                     'form': 'https://api-site.paris.fr/images/78343',
                     'isBaseRessourcesYearMoins2': false,
                     'roundToNearest10': false
+                },
+                'paris_nam': {
+                    'label': 'Paris NAM',
+                    'shortLabel': 'NAM',
+                    'description': '!!!!!',
+                    'link': 'http://www.paris.fr/nam',
+                    'form': 'http://www.paris.fr/nam-formulaire',
+                    'isBaseRessourcesYearMoins2': false,
+                    'entity': 'individu',
+                    'type': 'bool', // default type is float
                 }
             }
         },
