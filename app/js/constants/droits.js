@@ -516,6 +516,25 @@ var droitsDescription = {
                     'entity': 'individu', // default entity is famille
                 },
             }
+        },
+        'pau': {
+            'imgSrc': 'logo_pau.png',
+            'label': 'Pau',
+            'interactionWithNationalPrestationsHandled': true,
+            'prefix': 'de',
+            'prestations': {
+                'pau_transport_tarification_solidaire': {
+                    'isMontantAnnuel': true,
+                    'label': 'Tarification solidaire transports',
+                    'shortLabel': 'Pau Transport',
+                    'description': 'Le Centre Communal d‘Action Sociale de la Ville de Pau propose à certaines personnes domiciliées sur Pau depuis au moins 3 mois, des tarifs adaptés.',
+                    'link': 'http://www.pau.fr/245-idelis-un-reseau-de-bus-pour-tous.htm',
+                    'instructions': 'http://www.pau.fr/245-idelis-un-reseau-de-bus-pour-tous.htm#par26782',
+                    'isBaseRessourcesYearMoins2': false,
+                    'roundToNearestCent': true,
+                    'entity': 'individu', // default entity is famille
+                },
+            }
         }
     }
 };
