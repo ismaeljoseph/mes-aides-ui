@@ -493,7 +493,7 @@ var droitsDescription = {
                     'entity': 'individu', // default entity is famille
                 },
             }
-        },
+        },/*
         'brestmetropole': {
             'imgSrc': 'logo_brest_metropole.png',
             'label': 'Brest métropole',
@@ -516,7 +516,7 @@ var droitsDescription = {
                     'entity': 'individu', // default entity is famille
                 },
             }
-        },
+        },//*/
         'pau': {
             'imgSrc': 'logo_pau.png',
             'label': 'Pau',
