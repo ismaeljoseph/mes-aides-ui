@@ -537,7 +537,7 @@ var droitsDescription = {
                     'isMontantAnnuel': true,
                     'label': 'Tarification solidaire transports',
                     'shortLabel': 'Pau Transport',
-                    'description': 'Le Centre Communal d‘Action Sociale de la Ville de Pau propose à certaines personnes domiciliées sur Pau depuis au moins 3 mois, des tarifs adaptés.',
+                    'description': 'Le Centre Communal d‘Action Sociale de la Ville de Pau propose sous certaines conditions des tarifs adaptés.',
                     'link': 'http://www.pau.fr/245-idelis-un-reseau-de-bus-pour-tous.htm',
                     'instructions': 'http://www.pau.fr/245-idelis-un-reseau-de-bus-pour-tous.htm#par26782',
                     'isBaseRessourcesYearMoins2': false,
