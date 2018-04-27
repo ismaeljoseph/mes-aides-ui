@@ -1,6 +1,7 @@
 /* global emit: true */
 var Promise = require('bluebird');
 var MongoClient = Promise.promisifyAll(require('mongodb').MongoClient);
+var requests = require('./requests');
 
 var db;
 function saveDb(refDb) {
@@ -8,26 +9,11 @@ function saveDb(refDb) {
     return db;
 }
 
-function extractSimulationDailyCount(db, fromDate, toDate) {
-    return db.collection('situations').mapReduce(function() {
-        emit(this.dateDeValeur.toISOString().slice(0,10), 1);
-    }, function(date, values) {
-        return Array.sum(values);
-    }, {
-        out: {
-            inline: 1,
-        },
-        query: {
-            dateDeValeur: {
-                $gte: fromDate,
-                $lte: toDate,
-            },
-            modifiedFrom: {
-                $exists: false,
-            },
-        },
-    });
-}
+exports.closeDb = function() {
+    if (db) {
+        db.close();
+    }
+};
 
 function manageMissingCollection(error) {
     if (error.message == 'ns doesn\'t exist') {
@@ -49,20 +35,36 @@ function formatMongo(data) {
     }];
 }
 
-exports.getDailySituationCount = function(fromDate, toDate) {
-    return MongoClient
+function formatMongoCSV(data) {
+    return data.map(function(tuple) {
+        return tuple._id + ';' + tuple.value;
+    }).join('\n');
+}
+
+exports.extractData = function(queryFn, processFn) {
+    var p = MongoClient
     .connectAsync('mongodb://localhost:27017/dds')
     .then(saveDb)
-    .then(function(db) { return extractSimulationDailyCount(db, fromDate, toDate); })
+    .then(queryFn)
     .catch(manageMissingCollection)
     // MongoDB 2.4 (production) does not embed metadata of the operation, the result is directly available in the response
     // MongoDB 3.4 (dev environment) returns results with metadata and are available in the results property
     .then(function(response) { return response.results || response; })
-    .then(formatMongo);
+
+    if (! processFn) {
+        return p;
+    }
+
+    return p.then(processFn);
 };
 
-exports.closeDb = function() {
-    if (db) {
-        db.close();
-    }
+exports.getDailySituationCount = function(fromDate, toDate) {
+    return exports.extractData(
+        function(db) { return requests.extractSimulationDailyCount(db, fromDate, toDate); },
+        formatMongo
+    );
+};
+
+exports.getCommuneCount = function(fromDate, toDate) {
+    return exports.extractData(function(db) { return requests.extractSimulationCommuneCount(db, fromDate, toDate); });
 };
