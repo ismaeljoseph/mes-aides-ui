@@ -110,6 +110,11 @@ ddsApp.config(function($locationProvider, $stateProvider, $urlRouterProvider, $u
                 pageTitle: 'Liens utiles'
             }
         })
+        .state('nouvel-etablissement', {
+            url: '/nouvel-etablissement',
+            templateUrl: '/partials/nouvel-etablissement.html',
+            controller: 'NouvelEtablissementCtrl'
+        })
         .state('social', {
             url: '/social',
             templateUrl: '/content-pages/social.html',
