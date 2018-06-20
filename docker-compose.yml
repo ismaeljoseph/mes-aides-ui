@@ -2,6 +2,19 @@ version: '3'
 
 services:
 
+  chrome:
+    image: selenium/node-chrome:3.12.0-cobalt
+    depends_on:
+      - hub
+    environment:
+      - HUB_HOST=hub
+      - HUB_PORT=4444
+
+  hub:
+    image: selenium/hub:3.12.0-cobalt
+    ports:
+      - '4444:4444'
+
   mongo:
     image: mongo
     restart: always
@@ -31,9 +44,11 @@ services:
     depends_on:
       - mongo
       - openfisca
+      - chrome
     links:
       - mongo
       - openfisca
+      - hub
     volumes:
       - 'node_modules:/srv/app/node_modules'
       - 'bower_components:/srv/app/app/bower_components'
