@@ -18,7 +18,7 @@ module.exports = function(app) {
     var env = app.get('env');
     var directory = 'dist';
 
-    if ('development' === env) {
+    if (env === 'development') {
         directory = 'app';
 
         app.use(require('connect-livereload')());
@@ -65,10 +65,12 @@ module.exports = function(app) {
         return res.sendStatus(404);
     });
 
-    app.use('/js/lib', express.static(path.join(__dirname, 'node_modules'), {
-        fallthrough: false,  // short-circuit 404s
-        index: false,
-    }));
+    if (env === 'development') {
+        app.use('/node_modules', express.static(path.join(__dirname, 'node_modules'), {
+            fallthrough: false,  // short-circuit 404s
+            index: false,
+        }));
+    }
 
     app.route('/recap-situation/*').get(function(req, res) {
         res.sendFile(viewsDirectory + '/embed.html');
