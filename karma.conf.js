@@ -23,6 +23,7 @@ module.exports = function(config) {
 
     // list of files / patterns to exclude
     exclude: [
+      'app/js/controllers/trace.js',
     ],
 
     preprocessors: {

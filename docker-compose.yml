@@ -37,5 +37,14 @@ services:
       - 'node_modules:/srv/app/node_modules'
       - './:/srv/app'
 
+  phantomjs:
+    image: wernight/phantomjs
+    restart: always
+    ports:
+      - '8910:8910'
+      - '8002:8910'
+    command: "phantomjs --webdriver=8910 --ignore-ssl-errors=true --ssl-protocol=any"
+
+
 volumes:
   node_modules:
