@@ -21,9 +21,23 @@ Promise.all([
     piwik.getUsageData(nineWeeksAgo, yesterday)
 ])
     .then(function(data) { return [].concat(data[0], data[1]); })
+    .catch(function(request) {
+        console.error('=========================================');
+        console.error('===========NOT BLOCKING ERROR============');
+        console.error('=========================================');
+        console.error(request.error);
+        console.error('===========NOT BLOCKING ERROR============');
+        return [];
+    })
     .then(function(data) { return fs.writeFileAsync(relative_path, JSON.stringify(data, null, 2), 'utf-8'); })
     .catch(function(error) {
+        console.error('=========================================');
+        console.error('===================ERROR=================');
+        console.error('=========================================');
         console.error('error', error);
+        console.error('=========================================');
+        console.error('===================ERROR=================');
+        console.error('=========================================');
         process.exitCode = 1;
     })
     .finally(mongodb.closeDb);
