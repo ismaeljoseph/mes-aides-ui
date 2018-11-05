@@ -134,6 +134,16 @@ jobs:
       - run:
           name: Karma
           command: npm run test:karma
+  test_openfisca_test_generation:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/mes-aides-ui
+      - *install_pip_and_pipenv
+      - run:
+          name: Check OpenFisca test generation
+          command: pipenv run npm run test:openfisca
   test_selenium_chrome:
     <<: *defaults
     steps:
@@ -160,7 +170,7 @@ jobs:
       - run:
           name: Watai family suite
           command: node_modules/.bin/watai test/integration/family-suite  --config '{"driverCapabilities":{"browserName":"chrome","version":"latest"}}'
-  test_openfisca_test_generation:
+  test_selenium_firefox:
     <<: *defaults
     steps:
       - checkout
@@ -170,6 +180,25 @@ jobs:
       - run:
           name: Check OpenFisca test generation
           command: pipenv run npm run test:openfisca
+      - run:
+          name: Start OpenFisca
+          command: pipenv run gunicorn api --chdir openfisca/ --config openfisca/config.py --preload --log-level debug --log-file=-
+          background: true
+      - run:
+          name: Wait for OpenFisca
+          command: wget --retry-connrefused --waitretry=1 --output-document=/dev/null http://localhost:2000/variable/parisien
+      - *configure_watai
+      - *download_sauce_connect
+      - *start_sauce_connect
+      - *start_mes_aides
+      - *wait_for_sauce_connect
+      - *wait_for_mes_aides
+      - run:
+          name: Watai base suite
+          command: node_modules/.bin/watai test/integration/base-suite --config '{"driverCapabilities":{"browserName":"firefox","version":"latest"}}'
+      - run:
+          name: Watai family suite
+          command: node_modules/.bin/watai test/integration/family-suite  --config '{"driverCapabilities":{"browserName":"firefox","version":"latest"}}'
   deploy:
     machine:
       enabled: true
@@ -210,6 +239,15 @@ workflows:
           requires:
             - test_selenium_chrome
             - test_openfisca_test_generation
+      - test_selenium_firefox:
+          requires:
+            - install_openfisca
+            - test_mocha
+            - test_karma
+      - deploy:
+          requires:
+            - test_selenium_chrome
+            - test_selenium_firefox
           filters:
             branches:
               only: master
