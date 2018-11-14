@@ -53,6 +53,27 @@ function ressourcesYearMoins2Captured(situation) {
 function proxyRessources(individu, situation) {
     if (! ressourcesYearMoins2Captured(situation)) {
         duplicateRessourcesForAnneeFiscaleDeReference(individu, situation.dateDeValeur);
+    } else {
+        var periods = common.getPeriods(situation.dateDeValeur);
+        var yearMoins2 = moment(situation.dateDeValeur).subtract(2, 'years').format('YYYY');
+        ressources.categoriesRnc.forEach(function(categorieRnc) {
+            if (categorieRnc.yearlyOnly)
+                return;
+
+            if (! individu[categorieRnc.id])
+                return;
+
+            if (_.isNumber(individu[categorieRnc.id][yearMoins2])) {
+                var result = individu[categorieRnc.id];
+                var sumOverLast12Months = individu[categorieRnc.id][yearMoins2];
+
+                periods.anneeFiscaleReference12Months.forEach(function(month) {
+                    result[month] = sumOverLast12Months / 12;
+                });
+
+                delete individu[categorieRnc.id][yearMoins2];
+            }
+        });
     }
 }
 
