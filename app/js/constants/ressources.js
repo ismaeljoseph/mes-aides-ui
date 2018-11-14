@@ -340,7 +340,8 @@
         },
         {
             id: 'frais_reels',
-            label: 'Frais réels déductibles'
+            label: 'Frais réels déductibles',
+            yearlyOnly: true,
         },
         {
             id: 'pensions_alimentaires_percues',
@@ -350,7 +351,8 @@
         {
             id: 'pensions_alimentaires_versees',
             label: 'Pensions alimentaires versées',
-            sources: ['pensions_alimentaires_versees_individu']
+            sources: ['pensions_alimentaires_versees_individu'],
+            yearlyOnly: true,
         }
     ];
 
