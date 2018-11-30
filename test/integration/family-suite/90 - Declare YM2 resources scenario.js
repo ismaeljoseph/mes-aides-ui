@@ -13,7 +13,7 @@ steps: [
     {
         'ResultComponent.prestationYM2Warning': false,
         'ResultComponent.declareYM2ResourcesLink': false,
-        'ResultComponent.greyedPrestation': false,
+        'ResultComponent.needsYM2Tab': false,
     },
     RecapComponent.openYM2Demandeur(),
     {

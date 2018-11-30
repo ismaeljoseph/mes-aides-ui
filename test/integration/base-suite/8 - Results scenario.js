@@ -12,7 +12,7 @@ steps: [
         'ResultComponent.prestationMontant': /\d+ €/,
         'ResultComponent.prestationMontantDetail': /mois/,
         'ResultComponent.prestationYM2Warning': HAS_PRESTATION_WARNING,
-        'ResultComponent.greyedPrestation': HAS_PRESTATION_WARNING,
+        'ResultComponent.needsYM2Tab': HAS_PRESTATION_WARNING,
         'ResultComponent.declareYM2ResourcesLink': true,
     },
     ResultComponent.togglePrestationTab(),

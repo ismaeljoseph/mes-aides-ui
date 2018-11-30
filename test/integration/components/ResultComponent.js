@@ -13,5 +13,5 @@ prestationMoreInfoLink: '.droits-eligibles .result:nth-child(' + PRESTATION_TO_T
 openPrimeActiviteLink: { a: 'Prime d’activité' },
 requestPrimeActiviteLink: { a: 'Faire une demande' },
 
-greyedPrestation: '.droits-eligibles .needs-n-2',
+needsYM2Tab: '.droits-eligibles .needs-n-2',
 declareYM2ResourcesLink: { a: 'Déclarez vos ressources' },
