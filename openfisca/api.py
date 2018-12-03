@@ -3,7 +3,11 @@ from openfisca_web_api.app import create_app
 
 import atexit
 import cProfile
+import tempfile
 
+import datetime
+now = datetime.datetime.now()
+timestamp = now.isoformat().replace(':','-').replace('.', '-')
 
 profile = cProfile.Profile()
 profile.enable()
@@ -20,11 +24,10 @@ tax_benefit_system = build_tax_benefit_system(
 
 application = create_app(tax_benefit_system)
 
-tmp_dir = tempfile.mkdtemp(prefix='simulation_' + timestamp)
-print(tmp_dir)
-simulation_dumper.dump_simulation(simulation_actuelle, tmp_dir)
+def log():
+  print('dump_stats')
+  tf = tempfile.NamedTemporaryFile(prefix='tmp_c', delete = False)
+  print(tf.name)
+  profile.dump_stats(tf.name)
 
-log.info('dump_stats')
-tf = tempfile.NamedTemporaryFile(prefix='tmp_c' + str(count), delete = False)
-print(tf.name)
-profile.dump_stats(tf.name)
+atexit.register(log)
