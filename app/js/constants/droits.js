@@ -703,7 +703,7 @@
                 'label': 'Alfortville',
                 'interactionWithNationalPrestationsHandled': true,
                 'prefix': 'd’',
-                'prestations': {
+                'prestations': {/*
                     'alfortville_noel_enfants': {
                         'isMontantAnnuel': true,
                         'legend': 'en chèque cadeau',
@@ -718,7 +718,7 @@
                         'isBaseRessourcesYearMoins2': false,
                         'roundToNearestCent': true,
                         'private': true,
-                    },
+                    },*/
                 },
                 repository: 'bacASable'
             }

@@ -12,7 +12,7 @@ var lib = require('..');
 
 var counter = 0;
 var errors = 0;
-var limit = 30000;
+var limit = 2000;
 var startDate = (new Date()).toISOString();
 
 
