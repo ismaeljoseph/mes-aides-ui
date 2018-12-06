@@ -90,6 +90,9 @@ jobs:
       - run:
           name: Install OpenFisca
           command: pipenv install -r openfisca/requirements.txt
+      - run:
+          name: List installed packages
+          command: pipenv run pip list
       - persist_to_workspace:
           root: .
           paths:
