@@ -51,5 +51,18 @@ services:
       - './docker/nginx/snippets:/etc/nginx/snippets:ro'
       - './:/home/main/mes-aides-ui:ro'
 
+  zalenium:
+     image: dosel/zalenium
+     tty: true
+     volumes:
+       - /tmp/videos:/home/seluser/videos
+       - /var/run/docker.sock:/var/run/docker.sock
+     ports:
+       - 4444:4444
+     command: >
+       start --timeZone "Europe/Paris"
+     environment:
+       - PULL_SELENIUM_IMAGE=true
+
 volumes:
   node_modules:

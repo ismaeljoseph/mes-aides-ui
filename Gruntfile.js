@@ -87,7 +87,8 @@ module.exports = function (grunt) {
         // Activate this option if watching doesn't work on your machine
         // watchOptions: {
         //   poll: true
-        // }
+        // },
+        disableHostCheck: true,
       },
       start: {
         keepalive: false,
