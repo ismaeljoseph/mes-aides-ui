@@ -36,7 +36,7 @@ function allocateIndividualsToEntities(situation) {
     menage.enfants = enfantIds;
 }
 
-var notInjectedAids = ['aah'];
+var notInjectedAids = ['aah', 'ass'];
 function setNonInjectedPrestations(testCase, periods, value) {
     var prestationsFinancieres = _.pickBy(common.requestedVariables, function(definition, definitionName) {
         return ((! definition.type) || definition.type === 'float') && notInjectedAids.indexOf(definitionName) == -1;
