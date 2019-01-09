@@ -214,6 +214,9 @@ ddsApp.config(function($locationProvider, $stateProvider, $urlRouterProvider, $u
                 'individuForm@foyer.conjoint': individuFormView('conjoint')
             },
             resolve: resolveIndividuRole('conjoint'),
+            data: {
+                guard: true
+            }
         })
         .state('foyer.enfants', {
             url: '/enfants',
@@ -225,6 +228,9 @@ ddsApp.config(function($locationProvider, $stateProvider, $urlRouterProvider, $u
                 'validate@foyer.enfants': {
                     templateUrl: '/partials/foyer/enfants/validate.html',
                 },
+            },
+            data: {
+                guard: true
             }
         })
         .state('foyer.enfants.ajouter', {
@@ -266,7 +272,10 @@ ddsApp.config(function($locationProvider, $stateProvider, $urlRouterProvider, $u
         .state('foyer.ressources', {
             url: '/ressources',
             controller: 'FoyerRessourcesCtrl',
-            templateUrl: '/partials/foyer/ressources/layout.html'
+            templateUrl: '/partials/foyer/ressources/layout.html',
+            data: {
+                guard: true
+            }
         })
         .state('foyer.ressources.enfants', {
             templateUrl: '/partials/foyer/ressources/enfants.html',
@@ -291,7 +300,10 @@ ddsApp.config(function($locationProvider, $stateProvider, $urlRouterProvider, $u
         .state('foyer.pensionsAlimentaires', {
             templateUrl: '/partials/foyer/pensions-alimentaires.html',
             controller: 'FoyerPensionsAlimentairesCtrl',
-            url: '/pensions-alimentaires'
+            url: '/pensions-alimentaires',
+            data: {
+                guard: true
+            }
         })
         .state('foyer.resultat', {
             url: '/resultat?situationId',
@@ -331,7 +343,7 @@ ddsApp.config(function($locationProvider, $stateProvider, $urlRouterProvider, $u
         });
 });
 
-ddsApp.run(function($rootScope, $state, $stateParams, $window, $analytics, $anchorScroll, $templateCache, $timeout, $transitions) {
+ddsApp.run(function($rootScope, $state, $stateParams, $window, $analytics, $anchorScroll, $templateCache, $timeout, $transitions, SituationService) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
 
@@ -354,6 +366,20 @@ ddsApp.run(function($rootScope, $state, $stateParams, $window, $analytics, $anch
                 title.focus();
             }
         });
+    });
+
+    // Prevent direct access to a state if the user has not completed the foyer.demandeur state
+    // @see https://ui-router.github.io/guide/transitionhooks#redirecting-a-transition
+    $transitions.onStart({}, function(transition) {
+        var to = transition.to();
+        // The data.guard attribute is inherited when states are nested
+        if (to.data && to.data.guard) {
+            var situation = SituationService.restoreLocal();
+            if (! SituationService.passSanityCheck(situation)) {
+
+                return transition.router.stateService.target('foyer.demandeur');
+            }
+        }
     });
 
     // Preload templates in cache
