@@ -154,6 +154,14 @@ ddsApp.config(function($locationProvider, $stateProvider, $urlRouterProvider, $u
                 $window.location.href = '/tests';
             }
         })
+        .state('touteslesaides', {
+            url: '/touteslesaides',
+            templateUrl: '/content-pages/touteslesaides.html',
+            data: {
+                pageTitle: 'Aides calculées'
+            },
+            controller: 'HomepageCtrl'
+        })
         .state('validation', {
             url: '/validation',
             templateUrl: '/partials/validation.html',
