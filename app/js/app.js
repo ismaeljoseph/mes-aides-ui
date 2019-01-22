@@ -60,6 +60,13 @@ ddsApp.config(function($locationProvider, $stateProvider, $urlRouterProvider, $u
                 pageTitle: 'À propos'
             }
         })
+        .state('a-propos_openfisca', {
+            url: '/a-propos#fonctionnement',
+            templateUrl: '/content-pages/a-propos.html',
+            data: {
+                pageTitle: 'À propos'
+            }
+        })
         .state('ameli', {
             url: '/ameli',
             templateUrl: '/content-pages/ameli.html',

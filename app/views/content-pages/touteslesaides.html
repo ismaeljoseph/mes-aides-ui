@@ -1,50 +1,28 @@
 <article class="text container">
 
-  <!-- Ajouter paragraphe d'introduction  -->
+  <h1>Aides calculées par le simulateur</h1>
 
-  <!-- Ajouter paragraphe d'incitation pour les organismes pour ajouter de nouvelles aides -->
+  <p>Mes Aides calcule {{ prestationsNationalesCount }} prestations nationales et {{ partenairesLocauxCount }} aides locales de nos partenaires en une seule <a ui-sref="foyer.demandeur">simulation</a>. Les données sont traitées anonymement et sont comparés aux critères de toutes les aides afin de fournir la meilleure information possible. Certaines aides ont des conditions supplémentaires qu'il est difficile d'intégrer dans un simulateur : dans ce cas, nous les indiquons en fin de simulation.</p>
 
+  <p><a ui-sref="a-propos">En savoir plus sur Mes Aides</a>.</p>
 
-  <!-- Version de travail : ressources récupérées de la homepage -->
-  <div class="container">
-    <div class="frame-aides-homepage whiteframe-z1">
-      <h2 class="text-center">{{ prestationsNationalesCount }} aides nationales évaluées par le simulateur</h2>
-      <div ng-repeat="provider in prestationsNationales | orderObjectBy:'prestations':true">
-        <hr>
-        <div class="row">
-          <div class="text-center col-md-2">
-            <img ng-src="/img/{{ provider.imgSrc }}" alt="{{ provider.label }}"/>
-          </div>
-          <div class="col-md-10">
-            <dl ng-repeat="droit in provider.prestations">
-              <dt>{{ droit.label }}</dt>
-              <dd>
-                <div ng-bind-html="droit.description"></div>
-                <a ng-if="droit.link" href="{{ droit.link }}" target="_blank" rel="noopener">En savoir plus <i class="fa fa-external-link" aria-hidden="true"></i></a>
-              </dd>
-            </dl>
-          </div>
-        </div>
-      </div>
-      <hr>
-      <h2 class="text-center">{{ partenairesLocauxCount }} aides locales évaluées par le simulateur</h2>
-      <div ng-repeat="provider in partenairesLocaux | orderObjectBy:'prestations':true">
-        <hr>
-        <div class="row">
-          <div class="text-center col-md-2">
-            <img ng-src="/img/{{ provider.imgSrc }}" alt="{{ provider.label }}"/>
-          </div>
-          <div class="col-md-10">
-            <dl ng-repeat="droit in provider.prestations">
-              <dt>{{ droit.label }}</dt>
-              <dd>
-                <div ng-bind-html="droit.description"></div>
-                <a ng-if="droit.link" href="{{ droit.link }}" target="_blank" rel="noopener">En savoir plus <i class="fa fa-external-link" aria-hidden="true"></i></a>
-              </dd>
-            </dl>
-          </div>
-        </div>
-      </div>
+  <p>Administrations, collectivités, associations : vous souhaitez ajouter vos prestations à Mes Aides ? <a ui-sref="contact">Contactez-nous</a> pour mettre à jour notre moteur de calcul !</p>
+
+  <div ng-repeat="provider in prestationsNationales | orderObjectBy:'prestations':true">
+    <h2>{{ provider.label }}</h2>
+    <div ng-repeat="droit in provider.prestations">
+      <h3>{{ droit.label }}</h3>
+      <div ng-bind-html="droit.description"></div>
+      <a ng-if="droit.link" href="{{ droit.link }}" target="_blank" rel="noopener">En savoir plus <i class="fa fa-external-link" aria-hidden="true"></i></a>
+    </div>
+  </div>
+
+  <div ng-repeat="provider in partenairesLocaux | orderObjectBy:'prestations':true">
+    <h2>{{ provider.label }}</h2>
+    <div ng-repeat="droit in provider.prestations">
+      <h3>{{ droit.label }}</h3>
+      <div ng-bind-html="droit.description"></div>
+      <a ng-if="droit.link" href="{{ droit.link }}" target="_blank" rel="noopener">En savoir plus <i class="fa fa-external-link" aria-hidden="true"></i></a>
     </div>
   </div>
 

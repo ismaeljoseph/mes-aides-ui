@@ -10,8 +10,6 @@
     <p>Ce questionnaire en ligne simple vous donnera un montant mensuel pour chaque prestation et vous donnera accès aux démarches.</p>
   </div>
 
-
-  <!-- Google considère jusqu'à présent cette partie comme très importante : à surveiller sur la rédaction -->
   <div class="container">
     <div class="frame-aides-homepage whiteframe-z1">
       <h2 class="text-center">{{ prestationsNationalesCount + partenairesLocauxCount }} aides sociales. Une seule simulation.</h2>
@@ -22,18 +20,26 @@
             <dd>
               <div>
                 <p>
-                  Mes Aides est un simulateur en ligne qui permet d’estimer les prestations sociales auxquelles une personne est éligible à partir d’une description simple de sa situation. En fin de simulation, des liens sont proposés pour en savoir plus sur les aides proposées ainsi que sur les démarches à faire.
+                  Mes Aides est un simulateur en ligne qui permet d’estimer les aides sociales qu'une personne peut demander à partir d’une description simple de sa situation. En fin de simulation, des liens sont proposés pour en savoir plus et sur les démarches à faire.
                 </p>
                 <p>
-                  Mes Aides est amélioré en continue grâce à vos retours. Vous pouvez nous contacter sur la page des résultats si vous constatez un écart : toutes les suggestions sont prises en compte afin d’améliorer notre interface et notre moteur de calcul (OpenFisca).
+                  Mes Aides s'améliore en continue grâce à vos retours. Vous pouvez nous contacter sur la page des résultats si vous constatez un écart : toutes les suggestions sont prises en compte afin d’améliorer notre interface et  <a ui-sref="a-propos_openfisca">notre moteur de calcul</a>.
                 </p>
                 <p>
-                  Les principales aides nationales comme le RSA, la prime d'activité ou encore les allocations logements sont déjà incluses dans le simulateur. Vous pouvez accéder au détail de toutes les aides que nous calculons actuellement.
-                </p>
-                <p>
-                  Liste des aides proposées : X, Y, Z.
-                  <!-- Liste des aides proposées, un clic renvoi vers la page touteslesaides ancrée -->
-                  <!-- Le but : que ça soit lisible pour un robot. Pas pour un humain. -->
+                  Les principales aides nationales sont déjà incluses dans le simulateur. Vous pouvez accéder au détail de <a ui-sref="touteslesaides">toutes les aides</a> que nous calculons actuellement :
+                  <ul>
+                    <li ng-repeat="provider in prestationsNationales | orderObjectBy:'prestations':true">
+                      <!-- A ancrer correctement -->
+                      <a ui-sref="touteslesaides">{{ provider.label }}</a>
+                    </li>
+                  </ul>
+                  Ainsi que celles de nos partenaires locaux :
+                  <ul>
+                    <li ng-repeat="provider in prestationsLocales | orderObjectBy:'prestations':true">
+                      <!-- A ancrer correctement -->
+                      <a ui-sref="touteslesaides">{{ provider.label }}</a>
+                    </li>
+                  </ul>
                 </p>
               </div>
             </dd>
@@ -49,13 +55,13 @@
             <dd>
               <div>
                 <p>
-                  Si Mes Aides permet à plus de la moitié de ses utilisateurs d’avoir une réponse en moins de sept minutes, c’est parce que nous faisons plusieurs approximations de calcul pour vous faciliter la saisie. Par exemple, lorsque vous entrez un salaire mensuel, nous partons du principe que ce salaire était le même tout au long de l’année passée.
+                  Si Mes Aides permet à plus de la moitié de ses utilisateurs d’avoir une réponse en moins de sept minutes, c’est parce que le simulateur intègre plusieurs raccourcis pour faciliter la saisie. Par exemple, lorsque vous entrez un salaire mensuel, nous partons du principe que ce salaire était le même tout au long de l’année passée.
                   <br><br>
                   Pour avoir des résultats plus précis par rapport à votre situation, vous pouvez au cours ou à la fin de la simulation :
                   <ul>
                     <li>détailler vos ressources sur les 3 derniers mois</li>
                     <li>indiquer le total de vos ressources sur les 12 derniers mois</li>
-                    <li>entrer les ressources de votre dernière déclaration de revenus</li>
+                    <li>entrer les ressources de votre dernière déclaration de revenus (en {{ current_year }}, il s'agit de la déclaration {{ previous_year }} sur les revenus {{ yearMoins2 }})</li>
                     <li>préciser les aides que vous recevez déjà et à quel montant</li>
                     <li>ajouter des informations sur votre épargne et votre patrimoine</li>
                   </ul>
@@ -75,8 +81,9 @@
             <dd>
               <div>
                 <ul>
-                  <li>Janvier 2019 : Revalorisation du calcul de la prime d'activité.
-                  </li>
+                  <li>Janvier 2019 : Refonte de la page de résultats pour une meilleure lisibilité</li>
+                  <li>Janvier 2019 : Revalorisation du calcul de la prime d'activité.</li>
+                  <li>Fin 2018 : ajout de l'Allocation Adulte Handicapée</li>
                 </ul>
               </div>
             </dd>
