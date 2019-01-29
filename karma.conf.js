@@ -40,7 +40,7 @@ module.exports = function(config) {
       'node_modules/angular-mocks/angular-mocks.js',
       // FIXME Can't find variable: moment
       'node_modules/moment/moment.js',
-      'test/spec/**/*.js',
+      'test/spec/**/captureMontantRessource.js',
     ]),
 
     // list of files / patterns to exclude
