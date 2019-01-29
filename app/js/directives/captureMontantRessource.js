@@ -65,14 +65,14 @@ angular.module('ddsApp').directive('captureMontantRessource', function(MonthServ
                 annualValue: determineAnnualValue(),
                 monthlyValue: lastMonthValue,
                 detailed: ! isoMonths.reduce(function(previousValuesAreEqual, month) {
-                    return previousValuesAreEqual && scope.ressource[month.id] == lastMonthValue;
+                    return previousValuesAreEqual && (scope.ressource[month.id] - lastMonthValue) < 1e-3;
                 }, true) || scope.ressourceType.revenuExceptionnel
             };
 
             if (scope.ressourceType.sourceOpenfisca) {
                 RessourceService.getParameterFromOpenfisca(scope.ressourceType.sourceOpenfisca)
                     .then(function(parameter) {
-                        scope.locals.montantForfaitaire = parameter;
+                        scope.locals.montantForfaitaire = _.round(parameter, 2);
                     });
             }
 

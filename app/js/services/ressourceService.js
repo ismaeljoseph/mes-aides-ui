@@ -88,8 +88,8 @@ angular.module('ddsCommon').factory('RessourceService', function($http, MonthSer
             .then(function(resp) {
                 var values = resp.data.values;
                 var sortedByDates = Object.keys(values).sort();
-                var newestValue = values[sortedByDates.pop()];
-                return newestValue;
+                var latestValue = values[sortedByDates.pop()];
+                return latestValue;
             });
     }
 

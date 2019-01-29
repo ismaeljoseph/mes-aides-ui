@@ -35,10 +35,10 @@
         </div>
         <a
           ng-if="isNumber(locals.montantForfaitaire)"
-          class="col-sm-3 help-block"
+          class="col-sm-3 small"
           ng-click="locals.monthlyValue=locals.montantForfaitaire"
           href="">
-          Cliquez ici pour remplir automatiquement la case avec le montant forfaitaire de {{ locals.montantForfaitaire | currency : '€' : 2 }}
+          Remplir avec le montant mensuel de {{ locals.montantForfaitaire | currency : '€' : 2 }}
         </a>
       </div>
 
